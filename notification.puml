@@ -1,5 +1,5 @@
 @startuml
-
+!pragma layout smetana
 entity User {
     * id VARCHAR(100) <<PK>>
     --
@@ -16,5 +16,15 @@ entity Notification {
     user_id VARCHAR(100) <<FK>>
     category_id VARCHAR(100) <<FK>>
 }
+
+User ||--o{ Notification
+
+entity Category {
+    * id VARCHAR(100) <<PK>>
+    --
+    * name VARCHAR(100)
+}
+
+Category ||-o{ Notification
 
 @enduml
