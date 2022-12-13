@@ -184,3 +184,22 @@ INSERT INTO notification(title, detail, category_id, user_id, create_at)
 VALUES ('Contoh Pesanan Lagi', 'Detail Pesanan lagi', 'INFO', 'kresna', CURRENT_TIMESTAMP());
 INSERT INTO notification(title, detail, category_id, user_id, create_at)
 VALUES ('Contoh Promo Lagi', 'Detail Promo lagi', 'PROMO', null, CURRENT_TIMESTAMP());
+
+# Counter
+
+SELECT COUNT(*)
+FROM notification n
+         JOIN category c ON (n.category_id = c.id)
+         LEFT JOIN notification_read nr ON (nr.notification_id = n.id)
+WHERE (n.user_id = 'kresna' OR n.user_id IS NULL)
+  AND (nr.user_id IS NULL)
+ORDER BY n.create_at DESC;
+
+SELECT * FROM notification;
+
+INSERT INTO notification_read(is_read, notification_id, user_id)
+VALUES (true, 4, 'kresna');
+INSERT INTO notification_read(is_read, notification_id, user_id)
+VALUES (true, 5, 'kresna');
+INSERT INTO notification_read(is_read, notification_id, user_id)
+VALUES (true, 1, 'kresna');
